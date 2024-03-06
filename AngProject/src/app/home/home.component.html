@@ -1,0 +1,24 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+
+
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+      <div class="col-md-6">
+        <input type="text"  class="form-control align-items-center  justify-content-center" placeholder="First name" [(ngModel)]="searchtext " >
+</div>
+  </div></div>
+<div class="container-fluid"  >
+    <div class="row row-cols-2 row-cols-md-4">
+        <div class="col mb-4" *ngFor="let item of books">
+          <div class="card">
+            <img src="{{item.imageLink}}" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title |text-uppercase">{{item.title}}</h5>
+              <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+              <a class="btn btn-success btn-sm" href="/product/{{i}}">More</a>
+            </div>
+          </div>
+        </div>
+</div>
+</div>

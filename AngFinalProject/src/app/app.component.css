@@ -1,0 +1,20 @@
+.hero {
+    background-color: #222;
+    color: #fff;
+    padding: 100px 0;
+    background-image: url(../assets/images/2.jpg);
+    background-size: cover;
+    height: 100vh;
+    background-repeat: no-repeat;
+  }
+  
+  .hero h1 {
+    font-size: 3rem;
+    background-repeat: no-repeat;
+  }
+  
+  .hero .btn-primary {
+    background-color: #ff5733;
+    border-color: #ff5733;
+    background-repeat: no-repeat;
+  }

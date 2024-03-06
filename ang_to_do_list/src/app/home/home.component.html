@@ -1,0 +1,11 @@
+<div>
+    <input type="text" [(ngModel)]="newText">
+    <button (click)="addTextToList()">Add Text</button>
+    <div class="text-container">
+      <ul>
+        <li *ngFor="let text of texts; let i = index">
+          {{ text }} <button (click)="removeText(i)">REMOVE</button>
+        </li>
+      </ul>
+    </div>
+  </div>

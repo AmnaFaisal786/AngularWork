@@ -1,0 +1,138 @@
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+<style>
+    /* Custom CSS for card design */
+    .custom-card {
+      border: none;
+      border-radius: 15px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s ease-in-out;
+    }
+  
+    .custom-card:hover {
+      transform: translateY(-5px);
+    }
+  
+    .custom-card img {
+      max-height: 200px;
+      object-fit: cover;
+      border-top-left-radius: 15px;
+      border-top-right-radius: 15px;
+    }
+  
+    .custom-card .card-body {
+      background-color: #fff;
+    }
+  
+    .custom-card .card-title {
+      font-size: 1.5rem;
+      color: #333;
+    }
+  
+    .custom-card .card-subtitle {
+      font-size: 1.2rem;
+      color: #666;
+    }
+  
+    .custom-card .card-text {
+      font-size: 1rem;
+      color: #777;
+    }
+    .custom-jumbotron {
+    background-color: #94aec8; /* Background color */
+    padding: 40px; /* Padding inside the jumbotron */
+    border-radius: 15px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow */
+  }
+
+  .jumbotron-title {
+    font-size: 2.5rem; /* Title font size */
+    color: #333; /* Title color */
+  }
+
+  .jumbotron-description {
+    font-size: 1.25rem; /* Description font size */
+    color: #666; /* Description color */
+  }
+  </style>
+  <div class="container">
+   
+    <div class="container-fluid">
+        <!-- Bootstrap Jumbotron -->
+        <br><div class="jumbotron custom-jumbotron">
+            <h1 class="display-4 jumbotron-title">Books</h1>
+            <p class="lead jumbotron-description">Discover our collection of books.</p>
+          </div>
+          <br>
+
+          <div class="container mt-5">
+            <div class="row justify-content-left">
+                <div class="col-md-6">
+                  <input type="text"  class="form-control align-items-center  justify-content-center" placeholder="Search Books" [(ngModel)]="searchtext " >
+                  <br><br>
+          </div>
+            </div></div>
+        
+        <div class="row row-cols-1 row-cols-md-3">
+             
+          <div class="col mb-4" *ngFor="let item of books|searchfilter: searchtext   | paginate: { itemsPerPage: count, currentPage: p, totalItems: books.length }">
+            <div class="card custom-card">
+              <img src="{{item.imageLink}}" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h2 class="card-title">{{ item.title.toUpperCase() }}</h2>
+                <h3 class="card-subtitle mb-2 text-muted">{{ item.country }}</h3>
+                <h5 class="card-subtitle mb-2 text-muted">{{ item.author }}</h5>
+                <p class="card-text">Publication Year: {{ item.year }}</p>
+               
+                <p class="card-text"> Price: PKR {{ item.pages }}</p>
+                <a href="/books/{{item.id}}" class="btn btn-success btn-sm">More</a>
+                <button (click)="addToCart(item)" class="btn btn-success btn-sm">Add to Cart</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+
+
+
+
+
+  <div class="text-center">
+    <pagination-controls (pageChange)="p=$event"></pagination-controls>
+  </div>
+
+<!-- Cart Section -->
+<div class="container mt-5" *ngIf="cartItems.length > 0">
+  <h2>Shopping Cart</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Item</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Total</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let cartItem of cartItems; let i = index">
+        <td>{{ cartItem.title }}</td>
+        <td>PKR {{ cartItem.price }}</td>
+        <td>
+          <input type="number" [(ngModel)]="cartItems[i].quantity" (change)="updateQuantity(i)" />
+        </td>
+        <td>PKR {{ cartItem.price * cartItem.quantity }}</td>
+        <td>
+          <button (click)="removeFromCart(i)" class="btn btn-danger btn-sm">Remove</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <p>Total Price: PKR {{ totalPrice }}</p>
+</div>
+
+  
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
